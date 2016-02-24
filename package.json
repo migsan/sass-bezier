@@ -17,6 +17,7 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "mathsass": "^0.9.5",
     "node-sass": "^3.4.2",
     "nodemon": "^1.9.0"
   }

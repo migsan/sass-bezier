@@ -1,4 +1,32 @@
 /**
+* Defining atan function
+*/
+@function atan ($x) {
+    $i:  24;
+    $sgn: 0;
+    $a:   0;
+    @if $x > 1 {
+        $sgn:  1;
+        $x:    1 / $x;
+    } @else if $x < -1 {
+        $sgn: -1;
+        $x:    1 / $x;
+    }
+    @while $i > 0 {
+        $a: ($i * $i * $x * $x) / (2 * $i + 1 + $a);
+        $i: $i - 1;
+    }
+    @if $sgn > 0 {
+        @return  $PI / 2 - $x / (1 + $a);
+    } @else if $sgn < 0 {
+        @return -$PI / 2 - $x / (1 + $a);
+    } @else {
+        @return            $x / (1 + $a);
+    }
+}
+
+
+/**
 * Little helper to create a circle
 * @group control-points
 * @access private
@@ -30,6 +58,7 @@
 
 /**
 * Linear interpolation
+* @author Tim Severien
 * @param {Number} $a
 * @param {Number} $b
 * @param {Number} $p
@@ -42,6 +71,7 @@
 
 /**
 * Linear interpolation points
+* @author Tim Severien
 * @param {Number} $a
 * @param {Number} $b
 * @param {Number} $p
@@ -54,6 +84,7 @@
 
 /**
 * Bezier Reduce
+* @author Tim Severien
 * @param {List} $points
 * @param {Number} $p
 * @return {Number}
@@ -78,7 +109,7 @@
 * @param {List} $points - List of points from Bezier
 * @param {Number} $detail - Number of particles
 * @output box-shadow
-
+* @author Tim Severien
 */
 @mixin bezier-shadow($points, $detail) {
     $shadow: ();
@@ -127,6 +158,74 @@
         (nth($args, 3) * $size) ((1 - nth($args, 4)) * $size),
         $size 0
         ), map-get($conf, 'detail'));
+    }
+}
+
+
+/**
+* Draw control-points as well as lines getting to those
+* @access private
+* @param {Map} $conf - Curve configuration
+* @requires {mixin} absolute
+* @requires {mixin} circle
+* @output control-points
+*/
+@mixin draw-control-points($conf) {
+    $args: map-get($conf, 'points');
+    $size: map-get($conf, 'size');
+    $color: map-get($conf, 'color');
+
+    $x1: nth($args, 1);
+    $y1: nth($args, 2);
+    $x2: nth($args, 3);
+    $y2: nth($args, 4);
+
+    &::before {
+        content: '';
+        @include absolute;
+        @include circle(10px);
+        box-shadow:
+        0 $size 0 0 tomato,
+        $size 0 0 0 deepskyblue,
+        ($size * $x1) $size - ($size * $y1) 0 0 tomato,
+        ($size * $x2) $size - ($size * $y2) 0 0 deepskyblue;
+    }
+
+    > * {
+        @include absolute($top: 0, $right: 0, $bottom: 0, $left: 0);
+
+        &::after {
+            $v: abs($x2 * 100 - 100);
+            $w: abs($y2 * 100 - 100);
+
+            @include absolute($top: 0, $right: 0);
+            width:  if($v == 0, 1px, $v * 1%);
+            height: if($w == 0, 1px, $w * 1%);
+            content: '';
+            $arctan: atan(($y2 - 1) / ($x2 - 1));
+            background: linear-gradient(
+                if($x2 == 1, 90deg, 0 - $arctan * 1rad),
+                transparent calc(50% - 1px),
+                $color calc(50% - 1px),
+                $color calc(50% + 1px),
+                transparent calc(50% + 1px)
+            );
+        }
+
+        &::before {
+            @include absolute($left: 0, $bottom: 0);
+            content: '';
+            width:  $x1 * 100%;
+            height: $y1 * 100%;
+            $arctan2: atan(($y1) / ($x1));
+            background: linear-gradient(
+                if($x1 == 1, 90deg, 0 - $arctan2 * 1rad),
+                transparent calc(50% - 1px),
+                $color calc(50% - 1px),
+                $color calc(50% + 1px),
+                transparent calc(50% + 1px)
+            );
+        }
     }
 }
 
@@ -227,6 +326,18 @@
     @include draw-system($options);
 }
 
+@mixin arctancalc($p1x, $p1y, $p2x, $p2y) {
+    &:before {
+        $atanval: atan(($p1y) / ($p1x));
+        content: "#{$atanval}";
+        width: 100px;
+        height: 40px;
+        background-color: red;
+        color: blue;
+        display: inline-block;
+    }
+}
+
 
 
 /**
@@ -240,14 +351,10 @@
 
 .grid-1 {
     @include cubic-bezier(0.42, 0, 0.15, 1, (
-    'name': 'ease-in',
-    'control-points': false
+    'name': 'ease-in'
     ));
 }
 
 .grid-2 {
-    @include cubic-bezier(0.66, 0, 0.9, 0.2, (
-    'name': 'ease-in',
-    'control-points': false
-    ));
+    @include arctancalc(0.42, 0, 0.15, 1);
 }
