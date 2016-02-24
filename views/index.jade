@@ -1,13 +1,25 @@
 extends layout
 
 block content
-    h1= title
-    
-    div.graphic1
-        span This is the first graphic
+    div.wrapper-content
+        section.hero
+            div.hero-content
+                div.container
+                    h1.title.is-1= title
         
-    div.graphic2
-        span This is the second graphic
-        
-    div.graphic3
-        span This is the third graphic
+        section.section
+            div.container
+                div.columns
+                    div.column.graphic-wrapper
+                        p.notification.is-info This is the first graphic
+                        div.graphic.grid-1
+                            span
+                        
+                    div.column.graphic-wrapper
+                        p.notification.is-info This is the first graphic
+                        div.graphic.grid-2
+                            span
+                    div.column.graphic-wrapper
+                        p.notification.is-info This is the first graphic
+                        div.graphic.grid-3
+                            span
