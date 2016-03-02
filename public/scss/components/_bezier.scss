@@ -1,4 +1,13 @@
 /**
+* Defining constants
+*/
+// Constants
+$E:     2.718281828459045;
+$PI:    3.141592653589793;
+$LN2:   0.6931471805599453;
+$SQRT2: 1.4142135623730951;
+
+/**
 * Defining atan function
 */
 @function atan ($x) {
@@ -21,7 +30,7 @@
     } @else if $sgn < 0 {
         @return -$PI / 2 - $x / (1 + $a);
     } @else {
-        @return            $x / (1 + $a);
+        @return $x / (1 + $a);
     }
 }
 
@@ -338,8 +347,6 @@
     }
 }
 
-
-
 /**
 * DEMO *
 **/
@@ -356,5 +363,8 @@
 }
 
 .grid-2 {
-    @include arctancalc(0.42, 0, 0.15, 1);
+    @include cubic-bezier(0.27, 0.5, 0.15, 0.4, (
+    'name': 'ease-in'
+    ));
+    @include arctancalc(0.42, 0.5, 0.15, 1);
 }

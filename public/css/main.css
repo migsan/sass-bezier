@@ -2975,6 +2975,9 @@ a.menu-block:hover {
         border-bottom-color: #1fc8db; }
 
 /**
+* Defining constants
+*/
+/**
 * Defining atan function
 */
 /**
@@ -3142,13 +3145,80 @@ a.menu-block:hover {
         height: 0%;
         background: linear-gradient(0rad, transparent calc(50% - 1px), #999 calc(50% - 1px), #999 calc(50% + 1px), transparent calc(50% + 1px)); }
 
-.grid-2:before {
-  content: "0";
-  width: 100px;
-  height: 40px;
-  background-color: red;
-  color: blue;
-  display: inline-block; }
+.grid-2 {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  color: #999;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  border-top: 1px dashed;
+  border-right: 1px dashed; }
+  .grid-2::after, .grid-2::before {
+    position: absolute;
+    bottom: -1.75em;
+    text-transform: uppercase;
+    font-size: .75em; }
+  .grid-2::before {
+    content: "ease-in";
+    left: 0; }
+  .grid-2::after {
+    content: "0.27, 0.5, 0.15, 0.4";
+    right: 0; }
+  .grid-2 > * {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: #999; }
+    .grid-2 > *::after {
+      content: '';
+      width: 4px;
+      height: 4px;
+      margin: -2px;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-shadow: 0px 300px, 7.72511px 285.58556px, 14.76089px 272.28444px, 21.198px 260.01px, 27.12711px 248.67556px, 32.63889px 238.19444px, 37.824px 228.48px, 42.77311px 219.44556px, 47.57689px 211.00444px, 52.326px 203.07px, 57.11111px 195.55556px, 62.02289px 188.37444px, 67.152px 181.44px, 72.58911px 174.66556px, 78.42489px 167.96444px, 84.75px 161.25px, 91.65511px 154.43556px, 99.23089px 147.43444px, 107.568px 140.16px, 116.75711px 132.52556px, 126.88889px 124.44444px, 138.054px 115.83px, 150.34311px 106.59556px, 163.84689px 96.65444px, 178.656px 85.92px, 194.86111px 74.30556px, 212.55289px 61.72444px, 231.822px 48.09px, 252.75911px 33.31556px, 275.45489px 17.31444px; }
+    .grid-2 > *::before {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      margin: -5px;
+      border-radius: 50%;
+      box-shadow: 0 300px 0 0 tomato, 300px 0 0 0 deepskyblue, 81px 150px 0 0 tomato, 45px 180px 0 0 deepskyblue; }
+    .grid-2 > * > * {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0; }
+      .grid-2 > * > *::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 85%;
+        height: 60%;
+        content: '';
+        background: linear-gradient(-0.61466rad, transparent calc(50% - 1px), #999 calc(50% - 1px), #999 calc(50% + 1px), transparent calc(50% + 1px)); }
+      .grid-2 > * > *::before {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        content: '';
+        width: 27%;
+        height: 50%;
+        background: linear-gradient(-1.07566rad, transparent calc(50% - 1px), #999 calc(50% - 1px), #999 calc(50% + 1px), transparent calc(50% + 1px)); }
+  .grid-2:before {
+    content: "0.87214";
+    width: 100px;
+    height: 40px;
+    background-color: red;
+    color: blue;
+    display: inline-block; }
 
 .graphic {
   width: 100%;
