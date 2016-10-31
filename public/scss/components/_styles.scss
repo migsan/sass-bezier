@@ -4,7 +4,7 @@ html {
 
 header {
   background-color: $badass;
-  color: $dark-grey;
+  color: lightener($badass);
   font-size: 40px;
   padding: $module-padding;
 }

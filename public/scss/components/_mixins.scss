@@ -1,0 +1,3 @@
+@function lightener($value) {
+  @return $value - rgb(50, 50, 50);
+}
