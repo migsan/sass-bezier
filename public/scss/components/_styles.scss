@@ -1,8 +1,10 @@
-.wrapper-content {
+html {
+  font-family: $open-sans;
 }
 
-.graphic {
-    width: 100%;
-    height: 300px;
-    border: 1px solid $blue;
+header {
+  background-color: $badass;
+  color: $dark-grey;
+  font-size: 40px;
+  padding: $module-padding;
 }

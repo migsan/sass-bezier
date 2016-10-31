@@ -1,10 +1,7 @@
-@import "../lib/bulma/utilities/utilities";
-@import "../lib/bulma/config/variables";
-@import "../lib/bulma/config/generated-variables";
-@import "../lib/bulma/base/base";
-@import "../lib/bulma/elements/elements";
-@import "../lib/bulma/components/components";
-@import "../lib/bulma/layout/layout";
+@import "clean";
+@import "variables";
+@import "typography";
+@import "styles";
 
-@import "_bezier";
-@import "_styles";
+// components
+@import "hero";
